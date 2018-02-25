@@ -69,7 +69,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim ttt As String
 Private Sub abt1_Click()
-msg2 = MsgBox("v1.0 在后台连续记录剪贴板内容", vbOKOnly)
+msg2 = MsgBox("v1.1 在后台连续记录剪贴板内容" & vbCrLf & vbCrLf & "v1.12 修复剪贴板被占用时崩溃的错误", vbOKOnly)
 End Sub
 
 Private Sub Form_Load()
@@ -124,17 +124,8 @@ Private Sub SelA_Click()
     End With
 End Sub
 
-Sub Fuzi()
-Clipboard.SetText (Text1.Text)
-End Sub
-
-Sub ZT()
-Text1.Text = Clipboard.GetText
-End Sub
-
-
-
 Private Sub Timer1_Timer()
+On Error Resume Next
 If Clipboard.GetText <> ttt Then
     ttt = Clipboard.GetText
     If Sel2.Checked = True Then Text1.SelText = ttt & vbCrLf
