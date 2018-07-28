@@ -54,6 +54,15 @@ Begin VB.Form Form1
             Caption         =   "空格分隔"
          End
          Begin VB.Menu Sel4 
+            Caption         =   "逗号分隔"
+         End
+         Begin VB.Menu Sel5 
+            Caption         =   "句号分隔"
+         End
+         Begin VB.Menu Sel6 
+            Caption         =   "制表符分隔"
+         End
+         Begin VB.Menu Sel7 
             Caption         =   "无分隔符"
          End
       End
@@ -69,7 +78,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim ttt As String
 Private Sub abt1_Click()
-msg2 = MsgBox("v1.1 在后台连续记录剪贴板内容" & vbCrLf & vbCrLf & "v1.12 修复剪贴板被占用时崩溃的错误", vbOKOnly)
+msg2 = MsgBox("v1.1 在后台连续记录剪贴板内容" & vbCrLf & vbCrLf & "v1.12 修复剪贴板被占用时崩溃的错误" _
+& vbCrLf & vbCrLf & "v1.2 增加逗号和句号分隔符" & vbCrLf & vbCrLf & "v1.21 增加制表符分隔", vbOKOnly)
 End Sub
 
 Private Sub Form_Load()
@@ -79,41 +89,92 @@ End Sub
 Private Sub Sel1_Click()
 If Sel1.Checked = False Then
     Sel1.Checked = True
+    Sel2.Checked = False
+    Sel3.Checked = False
+    Sel4.Checked = False
+    Sel5.Checked = False
+    Sel6.Checked = False
+    Sel7.Checked = False
+    Timer1 = False
 End If
-Sel2.Checked = False
-Sel3.Checked = False
-Sel4.Checked = False
-Timer1 = False
 End Sub
 
 Private Sub Sel2_Click()
 If Sel2.Checked = False Then
     Sel2.Checked = True
+    Sel1.Checked = False
+    Sel3.Checked = False
+    Sel4.Checked = False
+    Sel5.Checked = False
+    Sel6.Checked = False
+    Sel7.Checked = False
+    Timer1 = True
 End If
-Sel1.Checked = False
-Sel3.Checked = False
-Sel4.Checked = False
-Timer1 = True
 End Sub
 
 Private Sub Sel3_Click()
 If Sel3.Checked = False Then
     Sel3.Checked = True
+    Sel1.Checked = False
+    Sel2.Checked = False
+    Sel4.Checked = False
+    Sel5.Checked = False
+    Sel6.Checked = False
+    Sel7.Checked = False
+    Timer1 = True
 End If
-Sel1.Checked = False
-Sel2.Checked = False
-Sel4.Checked = False
-Timer1 = True
 End Sub
 
 Private Sub Sel4_Click()
 If Sel4.Checked = False Then
     Sel4.Checked = True
+    Sel1.Checked = False
+    Sel2.Checked = False
+    Sel3.Checked = False
+    Sel6.Checked = False
+    Sel5.Checked = False
+    Sel7.Checked = False
+    Timer1 = True
 End If
-Sel1.Checked = False
-Sel2.Checked = False
-Sel3.Checked = False
-Timer1 = True
+End Sub
+
+Private Sub Sel5_Click()
+If Sel5.Checked = False Then
+    Sel5.Checked = True
+    Sel1.Checked = False
+    Sel2.Checked = False
+    Sel3.Checked = False
+    Sel6.Checked = False
+    Sel4.Checked = False
+    Sel7.Checked = False
+    Timer1 = True
+End If
+End Sub
+
+Private Sub Sel6_Click()
+If Sel6.Checked = False Then
+    Sel6.Checked = True
+    Sel1.Checked = False
+    Sel2.Checked = False
+    Sel3.Checked = False
+    Sel4.Checked = False
+    Sel5.Checked = False
+    Sel7.Checked = False
+    Timer1 = True
+End If
+End Sub
+
+Private Sub Sel7_Click()
+If Sel6.Checked = False Then
+    Sel7.Checked = True
+    Sel1.Checked = False
+    Sel2.Checked = False
+    Sel3.Checked = False
+    Sel4.Checked = False
+    Sel5.Checked = False
+    Sel6.Checked = False
+    Timer1 = True
+End If
 End Sub
 
 Private Sub SelA_Click()
@@ -129,7 +190,10 @@ On Error Resume Next
 If Clipboard.GetText <> ttt Then
     ttt = Clipboard.GetText
     If Sel2.Checked = True Then Text1.SelText = ttt & vbCrLf
-    If Sel3.Checked = True Then Text1.SelText = ttt & "  "
-    If Sel4.Checked = True Then Text1.SelText = ttt
+    If Sel3.Checked = True Then Text1.SelText = ttt & " "
+    If Sel4.Checked = True Then Text1.SelText = ttt & ","
+    If Sel5.Checked = True Then Text1.SelText = ttt & "."
+    If Sel6.Checked = True Then Text1.SelText = ttt & vbTab
+    If Sel7.Checked = True Then Text1.SelText = ttt
 End If
 End Sub
